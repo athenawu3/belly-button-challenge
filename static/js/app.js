@@ -1,9 +1,33 @@
+// URL
+const url = "https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json"
+
+// Promise Pending
+const dataPromise = d3.json(url);
+
+// Fetch the JSON data
+d3.json(url).then(function(data) {
+
+  // Get names array
+  const names = data.names;
+
+  // Select dropdown menu
+  const menu = d3.select("select")
+
+  // Append options under dropdown menu
+  for (let i=0; i<names.length; i++) {
+    let name = names[i];
+    menu.append("option").text(name);
+  };
+});
+
+
+
 // Build the metadata panel
 function buildMetadata(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
     // get the metadata field
-
+    const metadata = data.metadata
 
     // Filter the metadata for the object with the desired sample number
 
