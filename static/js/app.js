@@ -40,9 +40,8 @@ function buildMetadata(sample) {
 
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
-    Object.entries(result).forEach(([key, value]) => {
-      panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
-    })
+    panel.selectAll("h6").data(Object.entries(result)).enter().append("h6")
+    .text(d => `${d[0].toUpperCase()}: ${d[1]}`);
 
   });
 }
@@ -82,7 +81,9 @@ function buildCharts(sample) {
     let bubble_layout = {
       title: "Bacteria Cultures Per Sample",
       xaxis: {title: "OTU ID"},
-      yaxis: {title: "Number of Bacteria"}
+      yaxis: {title: "Number of Bacteria"},
+      width: 1000,
+      height: 600
     };
 
     // Render the Bubble Chart
